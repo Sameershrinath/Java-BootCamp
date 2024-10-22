@@ -87,7 +87,6 @@ New ATM balance: 70000
 
 This project is open-source and available for any non-commercial use.
 
-```
 
 ### Instructions:
 - Replace any placeholders or adjust balances as necessary if your program changes.
@@ -95,6 +94,9 @@ This project is open-source and available for any non-commercial use.
 
 
 
-# contribution
+# Contribution
 
- - Hi, I am [Samir Srinath]](https://sameershrinath.github.io/Portfolio/) ✨ [![Static Badge](https://img.shields.io/badge/Vatsal%20Saxena-white?style=flat&logo=github&logoColor=white&labelColor=black)](https://github.com/sameershrinath) ✨ [![Static Badge](https://img.shields.io/badge/Vatsal%20Saxena-white?style=flat&logo=linkedin&logoColor=blue&labelColor=white&color=blue)](https://linkedin.com/in/sameershrinath), this is my first open-source contribution.
+Hi, I'm [Sameer Srinath](https://sameershrinath.github.io/Portfolio/)! ✨  
+This is my first open-source contribution, and I'm excited to be part of the community. You can find me on [GitHub](https://github.com/sameershrinath) and connect with me on [LinkedIn](https://linkedin.com/in/sameershrinath).
+
+Let's collaborate and create something amazing! 🚀
