@@ -92,3 +92,9 @@ This project is open-source and available for any non-commercial use.
 ### Instructions:
 - Replace any placeholders or adjust balances as necessary if your program changes.
 - Feel free to add more sections depending on the features you implement later (like future improvements).
+
+
+
+# contribution
+
+ - Hi, I am [Samir Srinath]](https://sameershrinath.github.io/Portfolio/) ✨ [![Static Badge](https://img.shields.io/badge/Vatsal%20Saxena-white?style=flat&logo=github&logoColor=white&labelColor=black)](https://github.com/sameershrinath) ✨ [![Static Badge](https://img.shields.io/badge/Vatsal%20Saxena-white?style=flat&logo=linkedin&logoColor=blue&labelColor=white&color=blue)](https://linkedin.com/in/sameershrinath), this is my first open-source contribution.
