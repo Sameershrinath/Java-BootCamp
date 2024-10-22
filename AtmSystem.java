@@ -1,59 +1,92 @@
 import java.util.Scanner;
 
-public class AtmSystem {
+public class atmSystem {
     static int pin = 1234;
-    static double userAccountBalance = 10000;
-    static double atmMachineBalance = 50000;  // Assume ATM has 50,000 at the start
-    static final double MAX_DEPOSIT_LIMIT = 50000;  // Maximum deposit limit per transaction
+    static double accountBalance = 10000;  // User account balance
+    static double atmBalance = 50000;      // ATM machine balance
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please enter your ATM PIN: ");
-
-        // Check if the next input is an integer
+        
+        // Check if the input is an integer
         if (sc.hasNextInt()) {
             int userPin = sc.nextInt();
-
+            
             // Validate the PIN
             if (userPin == pin) {
-                System.out.println("Welcome to ATM");
-                boolean exit = false;
-
-                while (!exit) {
-                    System.out.println("Choose an option: ");
+                boolean continueBanking = true;
+                while (continueBanking) {
+                    System.out.println("\nATM Menu:");
                     System.out.println("1. Withdraw");
                     System.out.println("2. Deposit");
-                    System.out.println("3. Check Balance");
-                    System.out.println("4. Exit");
+                    System.out.println("3. Exit");
+                    System.out.print("Please select an option: ");
                     
                     if (sc.hasNextInt()) {
                         int option = sc.nextInt();
-
+                        
                         switch (option) {
-                            case 1: // Withdraw
-                                handleWithdrawal(sc);
+                            case 1: // Withdrawal
+                                System.out.print("Enter amount to withdraw: ");
+                                
+                                if (sc.hasNextInt()) {
+                                    int withdrawAmount = sc.nextInt();
+                                    
+                                    // Validate withdrawal
+                                    if (withdrawAmount > 0 && withdrawAmount <= accountBalance && withdrawAmount <= atmBalance) {
+                                        accountBalance -= withdrawAmount;
+                                        atmBalance -= withdrawAmount;
+                                        System.out.println("Withdrawal successful.");
+                                        System.out.println("Please collect your money.");
+                                        System.out.println("Remaining account balance: ₹" + accountBalance);
+                                        System.out.println("Remaining ATM balance: ₹" + atmBalance);
+                                    } else {
+                                        System.out.println("Insufficient balance in account or ATM.");
+                                    }
+                                } else {
+                                    System.out.println("Invalid input. Please enter a valid withdrawal amount.");
+                                    sc.next(); // Clear invalid input
+                                }
                                 break;
+                            
                             case 2: // Deposit
-                                handleDeposit(sc);
+                                System.out.print("Enter amount to deposit (Max ₹50000): ");
+                                
+                                if (sc.hasNextInt()) {
+                                    int depositAmount = sc.nextInt();
+                                    
+                                    // Validate deposit
+                                    if (depositAmount > 0 && depositAmount <= 50000) {
+                                        accountBalance += depositAmount;
+                                        atmBalance += depositAmount;
+                                        System.out.println("Deposit successful.");
+                                        System.out.println("Updated account balance: ₹" + accountBalance);
+                                        System.out.println("Updated ATM balance: ₹" + atmBalance);
+                                    } else {
+                                        System.out.println("Invalid deposit amount. Must be between ₹1 and ₹50000.");
+                                    }
+                                } else {
+                                    System.out.println("Invalid input. Please enter a valid deposit amount.");
+                                    sc.next(); // Clear invalid input
+                                }
                                 break;
-                            case 3: // Check Balance
-                                System.out.println("User account balance: " + userAccountBalance);
-                                System.out.println("ATM machine balance: " + atmMachineBalance);
+                            
+                            case 3: // Exit
+                                System.out.println("Thank you for using the ATM. Goodbye!");
+                                continueBanking = false;
                                 break;
-                            case 4: // Exit
-                                exit = true;
-                                System.out.println("Thank you for using the ATM.");
-                                break;
+                            
                             default:
-                                System.out.println("Invalid option. Please try again.");
+                                System.out.println("Invalid option. Please select a valid menu option.");
                         }
                     } else {
-                        System.out.println("Invalid input. Please select a numeric option.");
-                        sc.next(); // Consume invalid input
+                        System.out.println("Invalid input. Please enter a numeric option.");
+                        sc.next(); // Clear invalid input
                     }
                 }
             } else {
-                System.out.println("Invalid PIN.");
+                System.out.println("Invalid PIN. Please try again.");
             }
         } else {
             System.out.println("Invalid input. Please enter a numeric PIN.");
@@ -61,52 +94,5 @@ public class AtmSystem {
         
         // Close the scanner
         sc.close();
-    }
-
-    // Method to handle withdrawal
-    public static void handleWithdrawal(Scanner sc) {
-        System.out.println("Please enter the amount to withdraw: ");
-        if (sc.hasNextInt()) {
-            int amount = sc.nextInt();
-            if (amount > 0 && amount <= userAccountBalance && amount <= atmMachineBalance) {
-                userAccountBalance -= amount;  // Update user account balance
-                atmMachineBalance -= amount;   // Update ATM machine balance
-                System.out.println("Amount withdrawn: " + amount);
-                System.out.println("Please collect your money.");
-                System.out.println("Withdrawal successful. Remaining user balance: " + userAccountBalance);
-                System.out.println("Remaining ATM balance: " + atmMachineBalance);
-            } else if (amount > atmMachineBalance) {
-                System.out.println("ATM has insufficient funds for this withdrawal.");
-            } else if (amount > userAccountBalance) {
-                System.out.println("Insufficient balance in your account.");
-            } else {
-                System.out.println("Invalid amount. Please enter a positive amount.");
-            }
-        } else {
-            System.out.println("Invalid input. Please enter a valid amount.");
-            sc.next(); // Consume invalid input
-        }
-    }
-
-    // Method to handle deposit
-    public static void handleDeposit(Scanner sc) {
-        System.out.println("Please enter the amount to deposit (Maximum allowed is " + MAX_DEPOSIT_LIMIT + "): ");
-        if (sc.hasNextInt()) {
-            int amount = sc.nextInt();
-            if (amount > 0 && amount <= MAX_DEPOSIT_LIMIT) {
-                userAccountBalance += amount;  // Update user account balance
-                atmMachineBalance += amount;   // Update ATM machine balance
-                System.out.println("Amount deposited: " + amount);
-                System.out.println("Deposit successful. New user balance: " + userAccountBalance);
-                System.out.println("New ATM balance: " + atmMachineBalance);
-            } else if (amount > MAX_DEPOSIT_LIMIT) {
-                System.out.println("Deposit failed. Maximum deposit limit is " + MAX_DEPOSIT_LIMIT + ".");
-            } else {
-                System.out.println("Invalid amount. Please enter a positive amount.");
-            }
-        } else {
-            System.out.println("Invalid input. Please enter a valid amount.");
-            sc.next(); // Consume invalid input
-        }
     }
 }
